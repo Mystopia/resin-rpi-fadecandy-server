@@ -1,0 +1,10 @@
+before_install:
+- openssl aes-256-cbc -K $encrypted_21312c5b7ce0_key -iv $encrypted_21312c5b7ce0_iv -in deploy_key.enc -out deploy_key -d
+install: true
+script:
+- eval "$(ssh-agent -s)"
+- chmod 0600 ./deploy_key
+- ssh-add ./deploy_key
+- cat resin-host-key >> ~/.ssh/known_hosts
+- git remote add resin $RESIN_REMOTE
+- git push resin master
