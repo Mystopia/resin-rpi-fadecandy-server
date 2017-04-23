@@ -96,7 +96,7 @@ def draw_frame_fadecandy(frame):
             # print(x, y, pixelRGB)
             # unicorn.set_pixel(x, y, int(r),int(g),int(b))
             pixels[i] = (int(r),int(g),int(b))
-            print(pixels)
+            # print(pixels)
             client.put_pixels(pixels)
             i += 1
     # unicorn.show()
