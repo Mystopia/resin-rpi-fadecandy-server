@@ -22,6 +22,10 @@ from collections import defaultdict
 # unicorn.brightness(0.5)
 # width,height=unicorn.get_shape()
 
+# Fadecandy
+import opc
+client = opc.Client('localhost:7890')
+
 width, height = 20, 3
 OFFSET = 30
 VELOCITY = 0.3
@@ -49,7 +53,8 @@ def main():
                             frame[x][y] = pixelRGB
             if step % 500 == 0: print("T: ", step * SLEEP)
             # unicorn.show()
-            draw_frame(frame)
+            # draw_frame(frame)
+            draw_frame_fadecandy(frame)
             time.sleep(SLEEP)
 
 def pixel(x, y, i):
@@ -76,6 +81,22 @@ def draw_frame(frame):
             pixelRGB = frame[x][y]
             # print(x, y, pixelRGB)
             # unicorn.set_pixel(x, y, int(r),int(g),int(b))
+    # unicorn.show()
+
+def draw_frame_fadecandy(frame):
+    pixels = [ (0,0,0) ] * height * width
+    # print(frame)
+    i = 0
+    for y in range(height):
+        for x in range(width):
+            pixelRGB = frame[x][y]
+            r, g, b = pixelRGB
+            # print(x, y, pixelRGB)
+            # unicorn.set_pixel(x, y, int(r),int(g),int(b))
+            pixels[i] = (int(r),int(g),int(b))
+            print(pixels)
+            client.put_pixels(pixels)
+            i += 1
     # unicorn.show()
 
 if __name__ == '__main__':
