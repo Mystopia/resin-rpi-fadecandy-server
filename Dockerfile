@@ -5,7 +5,7 @@ ENV INITSYSTEM on
 
 RUN apt update \
   && apt install -yq --no-install-recommends dropbear \
-  && apt clean
+  && apt clean \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /app
