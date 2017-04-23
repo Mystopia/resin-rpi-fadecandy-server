@@ -2,7 +2,10 @@
 
 # Light each LED in sequence, and repeat.
 
-import opc, time
+import os
+import time
+
+import opc
 
 numLEDs = os.getenv('NUM_LEDS', 20 * 3)
 fadecandy_url = os.getenv('FADECANDY_URL', 'localhost:7890')
