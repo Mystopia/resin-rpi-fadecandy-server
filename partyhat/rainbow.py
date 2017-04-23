@@ -5,6 +5,7 @@ Derived from pimoroni/unicorn-hat
 https://github.com/pimoroni/unicorn-hat/blob/master/examples/rainbow.py
 """
 import math
+import os
 import time
 from collections import defaultdict
 
@@ -24,7 +25,8 @@ from collections import defaultdict
 
 # Fadecandy
 import opc
-client = opc.Client('localhost:7890')
+fadecandy_url = os.getenv('FADECANDY_URL', 'localhost:7890')
+client = opc.Client(fadecandy_url)
 
 width, height = 20, 3
 OFFSET = 30
