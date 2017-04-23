@@ -94,14 +94,12 @@ def draw_frame_fadecandy(frame):
     for y in range(height):
         for x in range(width):
             pixelRGB = frame[x][y]
-            r, g, b = pixelRGB
             # print(x, y, pixelRGB)
-            # unicorn.set_pixel(x, y, int(r),int(g),int(b))
+            r, g, b = pixelRGB
             pixels[i] = (int(r),int(g),int(b))
-            # print(pixels)
-            client.put_pixels(pixels)
             i += 1
-    # unicorn.show()
+    # print(pixels)
+    client.put_pixels(pixels)
 
 if __name__ == '__main__':
     main()
