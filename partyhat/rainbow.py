@@ -26,7 +26,9 @@ from collections import defaultdict
 # Fadecandy
 import opc
 fadecandy_url = os.getenv('FADECANDY_URL', 'localhost:7890')
+print('FADECANDY_URL:', fadecandy_url)
 client = opc.Client(fadecandy_url)
+print('CLIENT: ', client)
 
 width, height = 20, 3
 OFFSET = 30
