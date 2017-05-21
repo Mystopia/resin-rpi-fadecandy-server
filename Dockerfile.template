@@ -1,14 +1,19 @@
 FROM resin/%%RESIN_MACHINE_NAME%%-python
 
+WORKDIR /usr/src/app
+
+# Copy requirements.txt first for better cache on later pushes
+COPY ./requirements.txt /requirements.txt
+
+# pip install python deps from requirements.txt on the resin.io build server
+RUN pip install -r /requirements.txt
+
+RUN git clone https://github.com/scanlime/fadecandy.git /opt/fadecandy
+
+# This will copy all files in our root to the working  directory in the container
+COPY . ./
+
 # Enable systemd
 ENV INITSYSTEM on
 
-RUN mkdir /app
-COPY . /app/
-
-RUN pip install -r /app/requirements.txt
-RUN git clone https://github.com/scanlime/fadecandy.git /opt/fadecandy
-
-WORKDIR /app
-
-CMD ["supervisord", "-c", "/app/supervisord.conf"]
+CMD ["supervisord", "-c", "./supervisord.conf"]
